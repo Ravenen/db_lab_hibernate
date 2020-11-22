@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import ua.lviv.iot.hiberlab.model.SessionUtils;
 import ua.lviv.iot.hiberlab.model.dataaccess.DataAccess;
 
+import java.util.List;
+
 public class AbstractDataAccess<T> implements DataAccess<T> {
 
     private final Class<T> entityClass;
@@ -35,9 +37,22 @@ public class AbstractDataAccess<T> implements DataAccess<T> {
 
     @Override
     public T get(Integer id) {
+        T entity;
         try (sessionUtils) {
-            return sessionUtils.openSession().get(entityClass, id);
+            entity = sessionUtils.openSession().get(entityClass, id);
         }
+        return entity;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<T> getAll() {
+        List<T> entityList;
+        try (sessionUtils) {
+            Session session = sessionUtils.openSession();
+            entityList = session.createQuery("from " + entityClass).getResultList();
+        }
+        return entityList;
     }
 
     @Override
