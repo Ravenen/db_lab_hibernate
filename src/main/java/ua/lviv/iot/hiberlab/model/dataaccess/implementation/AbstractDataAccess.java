@@ -50,7 +50,7 @@ public class AbstractDataAccess<T> implements DataAccess<T> {
         List<T> entityList;
         try (sessionUtils) {
             Session session = sessionUtils.openSession();
-            entityList = session.createQuery("from " + entityClass).getResultList();
+            entityList = session.createQuery("from " + entityClass.getName()).getResultList();
         }
         return entityList;
     }
