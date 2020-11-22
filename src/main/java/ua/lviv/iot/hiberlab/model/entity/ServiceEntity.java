@@ -117,4 +117,17 @@ public class ServiceEntity {
     public void setServiceTypeByServiceTypeId(ServiceTypeEntity serviceTypeByServiceTypeId) {
         this.serviceTypeByServiceTypeId = serviceTypeByServiceTypeId;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceEntity{" +
+                "id=" + id +
+                ", date=" + date +
+                ", durationInHours=" + durationInHours +
+                ", totalPriceUah=" + totalPriceUah +
+                ", terminalByTerminalId=" + terminalByTerminalId +
+                ", workmanByWorkmanId=" + workmanByWorkmanId +
+                ", serviceTypeByServiceTypeId=" + serviceTypeByServiceTypeId +
+                '}';
+    }
 }
