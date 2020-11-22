@@ -20,7 +20,7 @@ public class AbstractDataAccess<T> implements DataAccess<T> {
     public void add(T entity) {
         try (sessionUtils) {
             Session currentSession = sessionUtils.openSessionWithTransaction();
-            currentSession.persist(entity);
+            currentSession.saveOrUpdate(entity);
             sessionUtils.commit();
         }
     }
@@ -58,7 +58,7 @@ public class AbstractDataAccess<T> implements DataAccess<T> {
     @Override
     public void update(T entity) {
         try (sessionUtils) {
-            sessionUtils.openSession().merge(entity);
+            sessionUtils.openSessionWithTransaction().merge(entity);
             sessionUtils.commit();
         }
     }
