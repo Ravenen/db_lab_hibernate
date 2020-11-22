@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AbstractService<T> implements Service<T> {
 
-    private DataAccess<T> dataAccess;
+    private final DataAccess<T> dataAccess;
 
     public AbstractService(DataAccess<T> dataAccess) {
         this.dataAccess = dataAccess;
