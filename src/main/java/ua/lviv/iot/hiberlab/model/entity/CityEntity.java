@@ -3,7 +3,9 @@ package ua.lviv.iot.hiberlab.model.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity @Table(name = "city", schema = "pavliyk_3") public class CityEntity {
+@Entity
+@Table(name = "city", schema = "pavliyk_3")
+public class CityEntity {
     private Integer id;
     private String name;
     private String postalCode;
@@ -13,7 +15,10 @@ import java.util.Objects;
     public CityEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -21,7 +26,9 @@ import java.util.Objects;
         this.id = id;
     }
 
-    @Basic @Column(name = "name") public String getName() {
+    @Basic
+    @Column(name = "name")
+    public String getName() {
         return name;
     }
 
@@ -29,7 +36,9 @@ import java.util.Objects;
         this.name = name;
     }
 
-    @Basic @Column(name = "postal_code") public String getPostalCode() {
+    @Basic
+    @Column(name = "postal_code")
+    public String getPostalCode() {
         return postalCode;
     }
 
@@ -37,7 +46,9 @@ import java.util.Objects;
         this.postalCode = postalCode;
     }
 
-    @ManyToOne @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false) public CountryEntity getCountryByCountryId() {
+    @ManyToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
+    public CountryEntity getCountryByCountryId() {
         return countryByCountryId;
     }
 
@@ -45,7 +56,8 @@ import java.util.Objects;
         this.countryByCountryId = countryByCountryId;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -60,14 +72,17 @@ import java.util.Objects;
         return Objects.equals(postalCode, that.postalCode);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (postalCode != null ? postalCode.hashCode() : 0);
         return result;
     }
 
-    @ManyToOne @JoinColumn(name = "region_id", referencedColumnName = "id") public RegionEntity getRegionByRegionId() {
+    @ManyToOne
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    public RegionEntity getRegionByRegionId() {
         return regionByRegionId;
     }
 

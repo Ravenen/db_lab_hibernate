@@ -16,7 +16,8 @@ public class PostController extends AbstractController<PostEntity> {
         super(new PostService());
     }
 
-    @Override public List<PostEntity> findAll() {
+    @Override
+    public List<PostEntity> findAll() {
         List<PostEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -31,7 +32,8 @@ public class PostController extends AbstractController<PostEntity> {
         return entities;
     }
 
-    @Override public PostEntity findById(Integer id) {
+    @Override
+    public PostEntity findById(Integer id) {
         PostEntity entity = super.findById(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -44,7 +46,8 @@ public class PostController extends AbstractController<PostEntity> {
         return entity;
     }
 
-    @Override public PostEntity create(PostEntity entity) {
+    @Override
+    public PostEntity create(PostEntity entity) {
         super.enterValueForColumn(entity, PostEntity::setPost, "post", String.class, false, 45);
         PostEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -54,7 +57,8 @@ public class PostController extends AbstractController<PostEntity> {
         return createdEntity;
     }
 
-    @Override public PostEntity update(Integer id, PostEntity entity) {
+    @Override
+    public PostEntity update(Integer id, PostEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -82,7 +86,8 @@ public class PostController extends AbstractController<PostEntity> {
         return entity;
     }
 
-    @Override public PostEntity delete(Integer id) {
+    @Override
+    public PostEntity delete(Integer id) {
         PostEntity entity = super.delete(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -95,7 +100,8 @@ public class PostController extends AbstractController<PostEntity> {
         return entity;
     }
 
-    @Override protected List<String> entityToList(PostEntity entity) {
+    @Override
+    protected List<String> entityToList(PostEntity entity) {
         String id = entity.getId().toString();
         String post = entity.getPost();
         return new LinkedList<>(List.of(id, post));

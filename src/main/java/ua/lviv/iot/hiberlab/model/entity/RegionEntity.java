@@ -2,7 +2,9 @@ package ua.lviv.iot.hiberlab.model.entity;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "region", schema = "pavliyk_3") public class RegionEntity {
+@Entity
+@Table(name = "region", schema = "pavliyk_3")
+public class RegionEntity {
     private Integer id;
     private String name;
     private CountryEntity countryByCountryId;
@@ -10,7 +12,10 @@ import javax.persistence.*;
     public RegionEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -18,7 +23,9 @@ import javax.persistence.*;
         this.id = id;
     }
 
-    @Basic @Column(name = "name") public String getName() {
+    @Basic
+    @Column(name = "name")
+    public String getName() {
         return name;
     }
 
@@ -26,7 +33,8 @@ import javax.persistence.*;
         this.name = name;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -41,14 +49,17 @@ import javax.persistence.*;
         return countryByCountryId.equals(that.countryByCountryId);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + countryByCountryId.hashCode();
         return result;
     }
 
-    @ManyToOne @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false) public CountryEntity getCountryByCountryId() {
+    @ManyToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
+    public CountryEntity getCountryByCountryId() {
         return countryByCountryId;
     }
 

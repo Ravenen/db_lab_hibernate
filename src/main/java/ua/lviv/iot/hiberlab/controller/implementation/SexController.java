@@ -16,7 +16,8 @@ public class SexController extends AbstractController<SexEntity> {
         super(new SexService());
     }
 
-    @Override public List<SexEntity> findAll() {
+    @Override
+    public List<SexEntity> findAll() {
         List<SexEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -31,7 +32,8 @@ public class SexController extends AbstractController<SexEntity> {
         return entities;
     }
 
-    @Override public SexEntity findById(Integer id) {
+    @Override
+    public SexEntity findById(Integer id) {
         SexEntity entity = super.findById(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -44,7 +46,8 @@ public class SexController extends AbstractController<SexEntity> {
         return entity;
     }
 
-    @Override public SexEntity create(SexEntity entity) {
+    @Override
+    public SexEntity create(SexEntity entity) {
         super.enterValueForColumn(entity, SexEntity::setSex, "sex", String.class, false, 45);
         SexEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -54,7 +57,8 @@ public class SexController extends AbstractController<SexEntity> {
         return createdEntity;
     }
 
-    @Override public SexEntity update(Integer id, SexEntity entity) {
+    @Override
+    public SexEntity update(Integer id, SexEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -82,7 +86,8 @@ public class SexController extends AbstractController<SexEntity> {
         return entity;
     }
 
-    @Override public SexEntity delete(Integer id) {
+    @Override
+    public SexEntity delete(Integer id) {
         SexEntity entity = super.delete(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -95,7 +100,8 @@ public class SexController extends AbstractController<SexEntity> {
         return entity;
     }
 
-    @Override protected List<String> entityToList(SexEntity entity) {
+    @Override
+    protected List<String> entityToList(SexEntity entity) {
         String id = entity.getId().toString();
         String sex = entity.getSex();
         return new LinkedList<>(List.of(id, sex));

@@ -2,7 +2,9 @@ package ua.lviv.iot.hiberlab.model.entity;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "address", schema = "pavliyk_3") public class AddressEntity {
+@Entity
+@Table(name = "address", schema = "pavliyk_3")
+public class AddressEntity {
     private Integer id;
     private String street;
     private Integer house;
@@ -11,7 +13,10 @@ import javax.persistence.*;
     public AddressEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -19,7 +24,9 @@ import javax.persistence.*;
         this.id = id;
     }
 
-    @Basic @Column(name = "street") public String getStreet() {
+    @Basic
+    @Column(name = "street")
+    public String getStreet() {
         return street;
     }
 
@@ -27,7 +34,9 @@ import javax.persistence.*;
         this.street = street;
     }
 
-    @Basic @Column(name = "house") public Integer getHouse() {
+    @Basic
+    @Column(name = "house")
+    public Integer getHouse() {
         return house;
     }
 
@@ -35,7 +44,9 @@ import javax.persistence.*;
         this.house = house;
     }
 
-    @ManyToOne @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false) public CityEntity getCityByCityId() {
+    @ManyToOne
+    @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
+    public CityEntity getCityByCityId() {
         return cityByCityId;
     }
 
@@ -43,7 +54,8 @@ import javax.persistence.*;
         this.cityByCityId = cityByCityId;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -60,7 +72,8 @@ import javax.persistence.*;
         return cityByCityId.equals(that.cityByCityId);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + street.hashCode();
         result = 31 * result + house.hashCode();

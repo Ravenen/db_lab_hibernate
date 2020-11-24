@@ -16,7 +16,8 @@ public class TerminalTypeController extends AbstractController<TerminalTypeEntit
         super(new TerminalTypeService());
     }
 
-    @Override public List<TerminalTypeEntity> findAll() {
+    @Override
+    public List<TerminalTypeEntity> findAll() {
         List<TerminalTypeEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -31,7 +32,8 @@ public class TerminalTypeController extends AbstractController<TerminalTypeEntit
         return entities;
     }
 
-    @Override public TerminalTypeEntity findById(Integer id) {
+    @Override
+    public TerminalTypeEntity findById(Integer id) {
         TerminalTypeEntity entity = super.findById(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -44,7 +46,8 @@ public class TerminalTypeController extends AbstractController<TerminalTypeEntit
         return entity;
     }
 
-    @Override public TerminalTypeEntity create(TerminalTypeEntity entity) {
+    @Override
+    public TerminalTypeEntity create(TerminalTypeEntity entity) {
         super.enterValueForColumn(entity, TerminalTypeEntity::setType, "type", String.class, false, 45);
         TerminalTypeEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -54,7 +57,8 @@ public class TerminalTypeController extends AbstractController<TerminalTypeEntit
         return createdEntity;
     }
 
-    @Override public TerminalTypeEntity update(Integer id, TerminalTypeEntity entity) {
+    @Override
+    public TerminalTypeEntity update(Integer id, TerminalTypeEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -82,7 +86,8 @@ public class TerminalTypeController extends AbstractController<TerminalTypeEntit
         return entity;
     }
 
-    @Override public TerminalTypeEntity delete(Integer id) {
+    @Override
+    public TerminalTypeEntity delete(Integer id) {
         TerminalTypeEntity entity = super.delete(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -95,7 +100,8 @@ public class TerminalTypeController extends AbstractController<TerminalTypeEntit
         return entity;
     }
 
-    @Override protected List<String> entityToList(TerminalTypeEntity entity) {
+    @Override
+    protected List<String> entityToList(TerminalTypeEntity entity) {
         String id = entity.getId().toString();
         String type = entity.getType();
         return new LinkedList<>(List.of(id, type));

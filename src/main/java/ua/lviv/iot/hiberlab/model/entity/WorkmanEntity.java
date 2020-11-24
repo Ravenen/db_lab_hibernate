@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity @Table(name = "workman", schema = "pavliyk_3") public class WorkmanEntity {
+@Entity
+@Table(name = "workman", schema = "pavliyk_3")
+public class WorkmanEntity {
     private Integer id;
     private String name;
     private String surname;
@@ -16,7 +18,10 @@ import java.util.Objects;
     public WorkmanEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -24,7 +29,9 @@ import java.util.Objects;
         this.id = id;
     }
 
-    @Basic @Column(name = "name") public String getName() {
+    @Basic
+    @Column(name = "name")
+    public String getName() {
         return name;
     }
 
@@ -32,7 +39,9 @@ import java.util.Objects;
         this.name = name;
     }
 
-    @Basic @Column(name = "surname") public String getSurname() {
+    @Basic
+    @Column(name = "surname")
+    public String getSurname() {
         return surname;
     }
 
@@ -40,7 +49,9 @@ import java.util.Objects;
         this.surname = surname;
     }
 
-    @Basic @Column(name = "price_per_hour_uah") public BigDecimal getPricePerHourUah() {
+    @Basic
+    @Column(name = "price_per_hour_uah")
+    public BigDecimal getPricePerHourUah() {
         return pricePerHourUah;
     }
 
@@ -48,7 +59,9 @@ import java.util.Objects;
         this.pricePerHourUah = pricePerHourUah;
     }
 
-    @Basic @Column(name = "contact_number") public String getContactNumber() {
+    @Basic
+    @Column(name = "contact_number")
+    public String getContactNumber() {
         return contactNumber;
     }
 
@@ -56,7 +69,8 @@ import java.util.Objects;
         this.contactNumber = contactNumber;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -79,7 +93,8 @@ import java.util.Objects;
         return postByPostId.equals(that.postByPostId);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + surname.hashCode();
@@ -90,7 +105,9 @@ import java.util.Objects;
         return result;
     }
 
-    @ManyToOne @JoinColumn(name = "sex_id", referencedColumnName = "id") public SexEntity getSexBySexId() {
+    @ManyToOne
+    @JoinColumn(name = "sex_id", referencedColumnName = "id")
+    public SexEntity getSexBySexId() {
         return sexBySexId;
     }
 
@@ -98,7 +115,9 @@ import java.util.Objects;
         this.sexBySexId = sexBySexId;
     }
 
-    @ManyToOne @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false) public PostEntity getPostByPostId() {
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
+    public PostEntity getPostByPostId() {
         return postByPostId;
     }
 

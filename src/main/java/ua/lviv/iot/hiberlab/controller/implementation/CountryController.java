@@ -16,7 +16,8 @@ public class CountryController extends AbstractController<CountryEntity> {
         super(new CountryService());
     }
 
-    @Override public List<CountryEntity> findAll() {
+    @Override
+    public List<CountryEntity> findAll() {
         List<CountryEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -31,7 +32,8 @@ public class CountryController extends AbstractController<CountryEntity> {
         return entities;
     }
 
-    @Override public CountryEntity findById(Integer id) {
+    @Override
+    public CountryEntity findById(Integer id) {
         CountryEntity entity = super.findById(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -44,7 +46,8 @@ public class CountryController extends AbstractController<CountryEntity> {
         return entity;
     }
 
-    @Override public CountryEntity create(CountryEntity entity) {
+    @Override
+    public CountryEntity create(CountryEntity entity) {
         super.enterValueForColumn(entity, CountryEntity::setName, "name", String.class, false, 53);
         CountryEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -54,7 +57,8 @@ public class CountryController extends AbstractController<CountryEntity> {
         return createdEntity;
     }
 
-    @Override public CountryEntity update(Integer id, CountryEntity entity) {
+    @Override
+    public CountryEntity update(Integer id, CountryEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -82,7 +86,8 @@ public class CountryController extends AbstractController<CountryEntity> {
         return entity;
     }
 
-    @Override public CountryEntity delete(Integer id) {
+    @Override
+    public CountryEntity delete(Integer id) {
         CountryEntity entity = super.delete(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -95,7 +100,8 @@ public class CountryController extends AbstractController<CountryEntity> {
         return entity;
     }
 
-    @Override protected List<String> entityToList(CountryEntity entity) {
+    @Override
+    protected List<String> entityToList(CountryEntity entity) {
         String id = entity.getId().toString();
         String name = entity.getName();
         return new LinkedList<>(List.of(id, name));

@@ -244,7 +244,7 @@ public class View {
     private Map<String, Printable> generateManufacturerMenuMethods() {
         Controller<ManufacturerEntity> manufacturerController = new ManufacturerController();
         ViewOperations<ManufacturerEntity> manufacturerOperation = new ViewOperations<>(manufacturerController,
-            ManufacturerEntity.class);
+                ManufacturerEntity.class);
 
         Map<String, Printable> menuMethods = new LinkedHashMap<>();
         menuMethods.put("1", manufacturerOperation::findAll);
@@ -268,7 +268,7 @@ public class View {
     private Map<String, Printable> generateTerminalTypeMenuMethods() {
         Controller<TerminalTypeEntity> terminalTypeController = new TerminalTypeController();
         ViewOperations<TerminalTypeEntity> terminalTypeOperation = new ViewOperations<>(terminalTypeController,
-            TerminalTypeEntity.class);
+                TerminalTypeEntity.class);
 
         Map<String, Printable> menuMethods = new LinkedHashMap<>();
         menuMethods.put("1", terminalTypeOperation::findAll);
@@ -292,7 +292,7 @@ public class View {
     private Map<String, Printable> generateTerminalMenuMethods() {
         Controller<TerminalEntity> terminalController = new TerminalController();
         ViewOperations<TerminalEntity> terminalOperation = new ViewOperations<>(terminalController,
-            TerminalEntity.class);
+                TerminalEntity.class);
 
         Map<String, Printable> menuMethods = new LinkedHashMap<>();
         menuMethods.put("1", terminalOperation::findAll);
@@ -385,7 +385,7 @@ public class View {
     private Map<String, Printable> generateServiceTypeMenuMethods() {
         Controller<ServiceTypeEntity> serviceTypeController = new ServiceTypeController();
         ViewOperations<ServiceTypeEntity> serviceTypeOperation = new ViewOperations<>(serviceTypeController,
-            ServiceTypeEntity.class);
+                ServiceTypeEntity.class);
 
         Map<String, Printable> menuMethods = new LinkedHashMap<>();
         menuMethods.put("1", serviceTypeOperation::findAll);

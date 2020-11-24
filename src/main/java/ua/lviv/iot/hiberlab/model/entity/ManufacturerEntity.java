@@ -2,7 +2,9 @@ package ua.lviv.iot.hiberlab.model.entity;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "manufacturer", schema = "pavliyk_3") public class ManufacturerEntity {
+@Entity
+@Table(name = "manufacturer", schema = "pavliyk_3")
+public class ManufacturerEntity {
     private Integer id;
     private String name;
     private String contactNumber;
@@ -11,7 +13,10 @@ import javax.persistence.*;
     public ManufacturerEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -19,7 +24,9 @@ import javax.persistence.*;
         this.id = id;
     }
 
-    @Basic @Column(name = "name") public String getName() {
+    @Basic
+    @Column(name = "name")
+    public String getName() {
         return name;
     }
 
@@ -27,7 +34,9 @@ import javax.persistence.*;
         this.name = name;
     }
 
-    @Basic @Column(name = "contact_number") public String getContactNumber() {
+    @Basic
+    @Column(name = "contact_number")
+    public String getContactNumber() {
         return contactNumber;
     }
 
@@ -35,7 +44,8 @@ import javax.persistence.*;
         this.contactNumber = contactNumber;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -52,7 +62,8 @@ import javax.persistence.*;
         return countryByCountryId.equals(that.countryByCountryId);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + contactNumber.hashCode();
@@ -60,7 +71,9 @@ import javax.persistence.*;
         return result;
     }
 
-    @ManyToOne @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false) public CountryEntity getCountryByCountryId() {
+    @ManyToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
+    public CountryEntity getCountryByCountryId() {
         return countryByCountryId;
     }
 

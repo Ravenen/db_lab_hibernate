@@ -16,7 +16,8 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
         this.sessionUtils = new SessionUtils();
     }
 
-    @Override public void add(T entity) {
+    @Override
+    public void add(T entity) {
         try (sessionUtils) {
             Session currentSession = sessionUtils.openSessionWithTransaction();
             currentSession.saveOrUpdate(entity);
@@ -24,7 +25,8 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
         }
     }
 
-    @Override public void delete(Integer id) {
+    @Override
+    public void delete(Integer id) {
         try (sessionUtils) {
             T entity = get(id);
             Session currentSession = sessionUtils.openSessionWithTransaction();
@@ -33,7 +35,8 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
         }
     }
 
-    @Override public T get(Integer id) {
+    @Override
+    public T get(Integer id) {
         T entity;
         try (sessionUtils) {
             entity = sessionUtils.openSession().get(entityClass, id);
@@ -41,7 +44,9 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
         return entity;
     }
 
-    @SuppressWarnings("unchecked") @Override public List<T> getAll() {
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<T> getAll() {
         List<T> entityList;
         try (sessionUtils) {
             Session session = sessionUtils.openSession();
@@ -50,7 +55,8 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
         return entityList;
     }
 
-    @Override public void update(T entity) {
+    @Override
+    public void update(T entity) {
         try (sessionUtils) {
             sessionUtils.openSessionWithTransaction().merge(entity);
             sessionUtils.commit();

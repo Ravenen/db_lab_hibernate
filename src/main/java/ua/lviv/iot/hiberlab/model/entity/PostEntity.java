@@ -2,14 +2,19 @@ package ua.lviv.iot.hiberlab.model.entity;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "post", schema = "pavliyk_3") public class PostEntity {
+@Entity
+@Table(name = "post", schema = "pavliyk_3")
+public class PostEntity {
     private Integer id;
     private String post;
 
     public PostEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -17,7 +22,9 @@ import javax.persistence.*;
         this.id = id;
     }
 
-    @Basic @Column(name = "post") public String getPost() {
+    @Basic
+    @Column(name = "post")
+    public String getPost() {
         return post;
     }
 
@@ -25,7 +32,8 @@ import javax.persistence.*;
         this.post = post;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -38,7 +46,8 @@ import javax.persistence.*;
         return post.equals(that.post);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + post.hashCode();
         return result;

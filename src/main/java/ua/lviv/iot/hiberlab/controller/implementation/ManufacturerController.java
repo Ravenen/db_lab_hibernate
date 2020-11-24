@@ -19,7 +19,8 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         super(new ManufacturerService());
     }
 
-    @Override public List<ManufacturerEntity> findAll() {
+    @Override
+    public List<ManufacturerEntity> findAll() {
         List<ManufacturerEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -34,7 +35,8 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         return entities;
     }
 
-    @Override public ManufacturerEntity findById(Integer id) {
+    @Override
+    public ManufacturerEntity findById(Integer id) {
         ManufacturerEntity entity = super.findById(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -47,10 +49,11 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         return entity;
     }
 
-    @Override public ManufacturerEntity create(ManufacturerEntity entity) {
+    @Override
+    public ManufacturerEntity create(ManufacturerEntity entity) {
         super.enterValueForColumn(entity, ManufacturerEntity::setName, "name", String.class, false, 45);
         super.enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
-            13);
+                13);
         Scanner input = new Scanner(System.in, "UTF-8");
         while (true) {
             System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
@@ -78,7 +81,8 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         return createdEntity;
     }
 
-    @Override public ManufacturerEntity update(Integer id, ManufacturerEntity entity) {
+    @Override
+    public ManufacturerEntity update(Integer id, ManufacturerEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -95,34 +99,34 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
             }
         }
         switch (column) {
-        case ("name"):
-            super.enterValueForColumn(entity, ManufacturerEntity::setName, "name", String.class, false, 45);
-            break;
-        case ("contact_number"):
-            super
-                .enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
-                    13);
-            break;
-        case ("country_id"):
-            while (true) {
-                System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-                String inputText = input.nextLine();
-                try {
-                    Integer value = Integer.parseInt(inputText);
-                    Service<CountryEntity> countryService = new CountryService();
-                    CountryEntity country = countryService.findById(value);
-                    if (country != null) {
-                        entity.setCountryByCountryId(country);
-                        break;
-                    } else {
+            case ("name"):
+                super.enterValueForColumn(entity, ManufacturerEntity::setName, "name", String.class, false, 45);
+                break;
+            case ("contact_number"):
+                super
+                        .enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
+                                13);
+                break;
+            case ("country_id"):
+                while (true) {
+                    System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
+                    String inputText = input.nextLine();
+                    try {
+                        Integer value = Integer.parseInt(inputText);
+                        Service<CountryEntity> countryService = new CountryService();
+                        CountryEntity country = countryService.findById(value);
+                        if (country != null) {
+                            entity.setCountryByCountryId(country);
+                            break;
+                        } else {
+                            System.out.println(ERROR_INVALID_VALUE);
+                        }
+                    } catch (IllegalArgumentException e) {
                         System.out.println(ERROR_INVALID_VALUE);
+                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
                     }
-                } catch (IllegalArgumentException e) {
-                    System.out.println(ERROR_INVALID_VALUE);
-                    System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
                 }
-            }
-            break;
+                break;
         }
         ManufacturerEntity oldEntity = super.update(id, entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -133,7 +137,8 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         return entity;
     }
 
-    @Override public ManufacturerEntity delete(Integer id) {
+    @Override
+    public ManufacturerEntity delete(Integer id) {
         ManufacturerEntity entity = super.delete(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -146,7 +151,8 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         return entity;
     }
 
-    @Override protected List<String> entityToList(ManufacturerEntity entity) {
+    @Override
+    protected List<String> entityToList(ManufacturerEntity entity) {
         String id = entity.getId().toString();
         String name = entity.getName();
         String contactNumber = entity.getContactNumber() == null ? "-" : entity.getContactNumber();

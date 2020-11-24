@@ -19,7 +19,8 @@ public class AddressController extends AbstractController<AddressEntity> {
         super(new AddressService());
     }
 
-    @Override public List<AddressEntity> findAll() {
+    @Override
+    public List<AddressEntity> findAll() {
         List<AddressEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -34,7 +35,8 @@ public class AddressController extends AbstractController<AddressEntity> {
         return entities;
     }
 
-    @Override public AddressEntity findById(Integer id) {
+    @Override
+    public AddressEntity findById(Integer id) {
         AddressEntity address = super.findById(id);
         if (address != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -47,7 +49,8 @@ public class AddressController extends AbstractController<AddressEntity> {
         return address;
     }
 
-    @Override public AddressEntity create(AddressEntity entity) {
+    @Override
+    public AddressEntity create(AddressEntity entity) {
         super.enterValueForColumn(entity, AddressEntity::setStreet, "street", String.class, false, 64);
         super.enterValueForColumn(entity, AddressEntity::setHouse, "house", Integer.class, true, -1);
         Scanner input = new Scanner(System.in, "UTF-8");
@@ -77,7 +80,8 @@ public class AddressController extends AbstractController<AddressEntity> {
         return createdEntity;
     }
 
-    @Override public AddressEntity update(Integer id, AddressEntity entity) {
+    @Override
+    public AddressEntity update(Integer id, AddressEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -94,32 +98,32 @@ public class AddressController extends AbstractController<AddressEntity> {
             }
         }
         switch (column) {
-        case ("street"):
-            super.enterValueForColumn(entity, AddressEntity::setStreet, "street", String.class, false, 64);
-            break;
-        case ("house"):
-            super.enterValueForColumn(entity, AddressEntity::setHouse, "house", Integer.class, true, -1);
-            break;
-        case ("city_id"):
-            while (true) {
-                System.out.printf(ENTER_DATA_FORMAT, "city_id", "", "");
-                String inputText = input.nextLine();
-                try {
-                    Integer value = Integer.parseInt(inputText);
-                    Service<CityEntity> cityService = new CityService();
-                    CityEntity city = cityService.findById(value);
-                    if (city != null) {
-                        entity.setCityByCityId(city);
-                        break;
-                    } else {
+            case ("street"):
+                super.enterValueForColumn(entity, AddressEntity::setStreet, "street", String.class, false, 64);
+                break;
+            case ("house"):
+                super.enterValueForColumn(entity, AddressEntity::setHouse, "house", Integer.class, true, -1);
+                break;
+            case ("city_id"):
+                while (true) {
+                    System.out.printf(ENTER_DATA_FORMAT, "city_id", "", "");
+                    String inputText = input.nextLine();
+                    try {
+                        Integer value = Integer.parseInt(inputText);
+                        Service<CityEntity> cityService = new CityService();
+                        CityEntity city = cityService.findById(value);
+                        if (city != null) {
+                            entity.setCityByCityId(city);
+                            break;
+                        } else {
+                            System.out.println(ERROR_INVALID_VALUE);
+                        }
+                    } catch (IllegalArgumentException e) {
                         System.out.println(ERROR_INVALID_VALUE);
+                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
                     }
-                } catch (IllegalArgumentException e) {
-                    System.out.println(ERROR_INVALID_VALUE);
-                    System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
                 }
-            }
-            break;
+                break;
         }
         AddressEntity oldEntity = super.update(id, entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -130,7 +134,8 @@ public class AddressController extends AbstractController<AddressEntity> {
         return entity;
     }
 
-    @Override public AddressEntity delete(Integer id) {
+    @Override
+    public AddressEntity delete(Integer id) {
         AddressEntity address = super.delete(id);
         if (address != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -143,7 +148,8 @@ public class AddressController extends AbstractController<AddressEntity> {
         return address;
     }
 
-    @Override protected List<String> entityToList(AddressEntity entity) {
+    @Override
+    protected List<String> entityToList(AddressEntity entity) {
         String id = entity.getId().toString();
         String street = entity.getStreet();
         String house = entity.getHouse() == null ? "-" : entity.getHouse().toString();

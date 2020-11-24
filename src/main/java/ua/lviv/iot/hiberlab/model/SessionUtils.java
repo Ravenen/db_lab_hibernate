@@ -63,11 +63,12 @@ public class SessionUtils implements AutoCloseable {
         configuration.addAnnotatedClass(TerminalTypeEntity.class);
         configuration.addAnnotatedClass(WorkmanEntity.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-            .applySettings(configuration.getProperties());
+                .applySettings(configuration.getProperties());
         return configuration.buildSessionFactory(builder.build());
     }
 
-    @Override public void close() {
+    @Override
+    public void close() {
         try {
             if (transaction != null) {
                 transaction.rollback();

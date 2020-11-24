@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-@Entity @Table(name = "service", schema = "pavliyk_3") public class ServiceEntity {
+@Entity
+@Table(name = "service", schema = "pavliyk_3")
+public class ServiceEntity {
     private Integer id;
     private Date date;
     private BigDecimal durationInHours;
@@ -16,7 +18,10 @@ import java.sql.Date;
     public ServiceEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -24,7 +29,9 @@ import java.sql.Date;
         this.id = id;
     }
 
-    @Basic @Column(name = "date") public Date getDate() {
+    @Basic
+    @Column(name = "date")
+    public Date getDate() {
         return date;
     }
 
@@ -32,7 +39,9 @@ import java.sql.Date;
         this.date = date;
     }
 
-    @Basic @Column(name = "duration_in_hours") public BigDecimal getDurationInHours() {
+    @Basic
+    @Column(name = "duration_in_hours")
+    public BigDecimal getDurationInHours() {
         return durationInHours;
     }
 
@@ -40,7 +49,10 @@ import java.sql.Date;
         this.durationInHours = durationInHours;
     }
 
-    @Basic @Column(name = "total_price_uah") @GeneratedValue public BigDecimal getTotalPriceUah() {
+    @Basic
+    @Column(name = "total_price_uah")
+    @GeneratedValue
+    public BigDecimal getTotalPriceUah() {
         return totalPriceUah;
     }
 
@@ -48,7 +60,8 @@ import java.sql.Date;
         this.totalPriceUah = totalPriceUah;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -71,7 +84,8 @@ import java.sql.Date;
         return serviceTypeByServiceTypeId.equals(that.serviceTypeByServiceTypeId);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + date.hashCode();
         result = 31 * result + durationInHours.hashCode();
@@ -82,7 +96,9 @@ import java.sql.Date;
         return result;
     }
 
-    @ManyToOne @JoinColumn(name = "terminal_id", referencedColumnName = "id", nullable = false) public TerminalEntity getTerminalByTerminalId() {
+    @ManyToOne
+    @JoinColumn(name = "terminal_id", referencedColumnName = "id", nullable = false)
+    public TerminalEntity getTerminalByTerminalId() {
         return terminalByTerminalId;
     }
 
@@ -90,7 +106,9 @@ import java.sql.Date;
         this.terminalByTerminalId = terminalByTerminalId;
     }
 
-    @ManyToOne @JoinColumn(name = "workman_id", referencedColumnName = "id", nullable = false) public WorkmanEntity getWorkmanByWorkmanId() {
+    @ManyToOne
+    @JoinColumn(name = "workman_id", referencedColumnName = "id", nullable = false)
+    public WorkmanEntity getWorkmanByWorkmanId() {
         return workmanByWorkmanId;
     }
 
@@ -98,7 +116,9 @@ import java.sql.Date;
         this.workmanByWorkmanId = workmanByWorkmanId;
     }
 
-    @ManyToOne @JoinColumn(name = "service_type_id", referencedColumnName = "id") public ServiceTypeEntity getServiceTypeByServiceTypeId() {
+    @ManyToOne
+    @JoinColumn(name = "service_type_id", referencedColumnName = "id")
+    public ServiceTypeEntity getServiceTypeByServiceTypeId() {
         return serviceTypeByServiceTypeId;
     }
 
@@ -106,7 +126,8 @@ import java.sql.Date;
         this.serviceTypeByServiceTypeId = serviceTypeByServiceTypeId;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "ServiceEntity{" + "id=" + id + ", date=" + date + ", durationInHours=" + durationInHours + ", totalPriceUah=" + totalPriceUah + ", terminalByTerminalId=" + terminalByTerminalId + ", workmanByWorkmanId=" + workmanByWorkmanId + ", serviceTypeByServiceTypeId=" + serviceTypeByServiceTypeId + '}';
     }
 }

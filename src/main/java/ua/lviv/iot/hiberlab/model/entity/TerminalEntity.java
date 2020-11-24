@@ -3,7 +3,9 @@ package ua.lviv.iot.hiberlab.model.entity;
 import javax.persistence.*;
 import java.sql.Date;
 
-@Entity @Table(name = "terminal", schema = "pavliyk_3") public class TerminalEntity {
+@Entity
+@Table(name = "terminal", schema = "pavliyk_3")
+public class TerminalEntity {
     private Integer id;
     private String gpsCoordinates;
     private Date commissioningDate;
@@ -13,7 +15,10 @@ import java.sql.Date;
     public TerminalEntity() {
     }
 
-    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) public Integer getId() {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
@@ -21,7 +26,9 @@ import java.sql.Date;
         this.id = id;
     }
 
-    @Basic @Column(name = "gps_coordinates") public String getGpsCoordinates() {
+    @Basic
+    @Column(name = "gps_coordinates")
+    public String getGpsCoordinates() {
         return gpsCoordinates;
     }
 
@@ -29,7 +36,9 @@ import java.sql.Date;
         this.gpsCoordinates = gpsCoordinates;
     }
 
-    @Basic @Column(name = "commissioning_date") public Date getCommissioningDate() {
+    @Basic
+    @Column(name = "commissioning_date")
+    public Date getCommissioningDate() {
         return commissioningDate;
     }
 
@@ -37,7 +46,8 @@ import java.sql.Date;
         this.commissioningDate = commissioningDate;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -56,7 +66,8 @@ import java.sql.Date;
         return addressByAddressId.equals(that.addressByAddressId);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + gpsCoordinates.hashCode();
         result = 31 * result + commissioningDate.hashCode();
@@ -65,7 +76,9 @@ import java.sql.Date;
         return result;
     }
 
-    @ManyToOne @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", nullable = false) public ManufacturerEntity getManufacturerByManufacturerId() {
+    @ManyToOne
+    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", nullable = false)
+    public ManufacturerEntity getManufacturerByManufacturerId() {
         return manufacturerByManufacturerId;
     }
 
@@ -73,7 +86,9 @@ import java.sql.Date;
         this.manufacturerByManufacturerId = manufacturerByManufacturerId;
     }
 
-    @ManyToOne @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false) public AddressEntity getAddressByAddressId() {
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
+    public AddressEntity getAddressByAddressId() {
         return addressByAddressId;
     }
 

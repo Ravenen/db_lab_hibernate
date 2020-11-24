@@ -16,7 +16,8 @@ public class ServiceTypeController extends AbstractController<ServiceTypeEntity>
         super(new ServiceTypeService());
     }
 
-    @Override public List<ServiceTypeEntity> findAll() {
+    @Override
+    public List<ServiceTypeEntity> findAll() {
         List<ServiceTypeEntity> entities = super.findAll();
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -31,7 +32,8 @@ public class ServiceTypeController extends AbstractController<ServiceTypeEntity>
         return entities;
     }
 
-    @Override public ServiceTypeEntity findById(Integer id) {
+    @Override
+    public ServiceTypeEntity findById(Integer id) {
         ServiceTypeEntity entity = super.findById(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -44,7 +46,8 @@ public class ServiceTypeController extends AbstractController<ServiceTypeEntity>
         return entity;
     }
 
-    @Override public ServiceTypeEntity create(ServiceTypeEntity entity) {
+    @Override
+    public ServiceTypeEntity create(ServiceTypeEntity entity) {
         super.enterValueForColumn(entity, ServiceTypeEntity::setType, "type", String.class, false, 45);
         ServiceTypeEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -54,7 +57,8 @@ public class ServiceTypeController extends AbstractController<ServiceTypeEntity>
         return createdEntity;
     }
 
-    @Override public ServiceTypeEntity update(Integer id, ServiceTypeEntity entity) {
+    @Override
+    public ServiceTypeEntity update(Integer id, ServiceTypeEntity entity) {
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -82,7 +86,8 @@ public class ServiceTypeController extends AbstractController<ServiceTypeEntity>
         return entity;
     }
 
-    @Override public ServiceTypeEntity delete(Integer id) {
+    @Override
+    public ServiceTypeEntity delete(Integer id) {
         ServiceTypeEntity entity = super.delete(id);
         if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
@@ -95,7 +100,8 @@ public class ServiceTypeController extends AbstractController<ServiceTypeEntity>
         return entity;
     }
 
-    @Override protected List<String> entityToList(ServiceTypeEntity entity) {
+    @Override
+    protected List<String> entityToList(ServiceTypeEntity entity) {
         String id = entity.getId().toString();
         String type = entity.getType();
         return new LinkedList<>(List.of(id, type));
