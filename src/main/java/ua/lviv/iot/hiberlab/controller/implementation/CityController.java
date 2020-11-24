@@ -27,8 +27,8 @@ public class CityController extends AbstractController<CityEntity> {
         if (entities != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
             List<List<String>> body = new LinkedList<>();
-            for (CityEntity city : entities) {
-                body.add(entityToList(city));
+            for (CityEntity entity : entities) {
+                body.add(entityToList(entity));
             }
             Formatter.formatTable(headerList, body);
         } else {
@@ -39,16 +39,16 @@ public class CityController extends AbstractController<CityEntity> {
 
     @Override
     public CityEntity findById(Integer id) {
-        CityEntity city = super.findById(id);
-        if (city != null) {
+        CityEntity entity = super.findById(id);
+        if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
             List<List<String>> body = new LinkedList<>();
-            body.add(entityToList(city));
+            body.add(entityToList(entity));
             Formatter.formatTable(headerList, body);
         } else {
             System.out.println(ERROR_NO_MATCHES_FOUND);
         }
-        return city;
+        return entity;
     }
 
     @Override
@@ -106,7 +106,6 @@ public class CityController extends AbstractController<CityEntity> {
 
     @Override
     public CityEntity update(Integer id, CityEntity entity) {
-//        CityEntity oldEntity = super.findById(id);
         Scanner input = new Scanner(System.in, "UTF-8");
         String column;
         while (true) {
@@ -186,16 +185,16 @@ public class CityController extends AbstractController<CityEntity> {
 
     @Override
     public CityEntity delete(Integer id) {
-        CityEntity city = super.delete(id);
-        if (city != null) {
+        CityEntity entity = super.delete(id);
+        if (entity != null) {
             List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
             List<List<String>> body = new LinkedList<>();
-            body.add(entityToList(city));
+            body.add(entityToList(entity));
             Formatter.formatTable(headerList, body);
         } else {
             System.out.println(ERROR_NO_MATCHES_FOUND);
         }
-        return city;
+        return entity;
     }
 
     @Override
