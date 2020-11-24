@@ -2,24 +2,16 @@ package ua.lviv.iot.hiberlab.view;
 
 import ua.lviv.iot.hiberlab.controller.Controller;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class ViewOperations<T> {
 
-    private static final String ERROR_NO_MATCHES_FOUND = "[Error] No matches found";
-    private static final String ERROR_MODIFY = "[Error] Unable to create or modify this object";
     private static final String ERROR_INVALID_VALUE = "[Error] Entered invalid value";
-    private static final String ERROR_SQL = "[Error] Error while executing SQL";
-    private static final String ERROR_MESSAGE_FORMAT = "[Error] Message: %s";
+    private static final String ERROR_MESSAGE_FORMAT = "[Error] Message: %s %n";
 
     private static final String KEY_EXIT = "Q";
-    private static final String TEXT_ENTER_FIELD_FORMAT = "Enter %s: %n";
-    private static final String TEXT_CHOOSE_FIELD = "Choose fild to update (enter name):";
     private static final String TEXT_ENTER_FIELD_OR_QUIT_FORMAT = "Enter %s or press '" + KEY_EXIT + "' to go back: %n";
 
     private static final Scanner input = new Scanner(System.in, "UTF-8");
