@@ -4,7 +4,7 @@ import ua.lviv.iot.hiberlab.model.dataaccess.implementation.ManufacturerDataAcce
 import ua.lviv.iot.hiberlab.model.entity.ManufacturerEntity;
 
 public class ManufacturerService extends AbstractService<ManufacturerEntity> {
-  public ManufacturerService() {
-    super(new ManufacturerDataAccess());
-  }
+    public ManufacturerService() {
+        super(new ManufacturerDataAccess());
+    }
 }

@@ -4,7 +4,7 @@ import ua.lviv.iot.hiberlab.model.dataaccess.implementation.ServiceTypeDataAcces
 import ua.lviv.iot.hiberlab.model.entity.ServiceTypeEntity;
 
 public class ServiceTypeService extends AbstractService<ServiceTypeEntity> {
-  public ServiceTypeService() {
-    super(new ServiceTypeDataAccess());
-  }
+    public ServiceTypeService() {
+        super(new ServiceTypeDataAccess());
+    }
 }

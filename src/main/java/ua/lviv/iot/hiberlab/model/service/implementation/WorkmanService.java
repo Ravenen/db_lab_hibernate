@@ -4,7 +4,7 @@ import ua.lviv.iot.hiberlab.model.dataaccess.implementation.WorkmanDataAccess;
 import ua.lviv.iot.hiberlab.model.entity.WorkmanEntity;
 
 public class WorkmanService extends AbstractService<WorkmanEntity> {
-  public WorkmanService() {
-    super(new WorkmanDataAccess());
-  }
+    public WorkmanService() {
+        super(new WorkmanDataAccess());
+    }
 }

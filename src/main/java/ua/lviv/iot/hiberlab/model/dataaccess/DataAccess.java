@@ -3,13 +3,13 @@ package ua.lviv.iot.hiberlab.model.dataaccess;
 import java.util.List;
 
 public interface DataAccess<T> {
-  void add(T entity);
+    void add(T entity);
 
-  void delete(Integer id);
+    void delete(Integer id);
 
-  T get(Integer id);
+    T get(Integer id);
 
-  List<T> getAll();
+    List<T> getAll();
 
-  void update(T entity);
+    void update(T entity);
 }
