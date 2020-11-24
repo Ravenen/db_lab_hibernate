@@ -9,7 +9,7 @@ public interface Service<T> {
 
     T create(T entity);
 
-    T update(T entity);
+    T update(Integer id, T entity);
 
     T delete(Integer id);
 }

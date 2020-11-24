@@ -5,7 +5,7 @@ import ua.lviv.iot.hiberlab.model.service.Service;
 
 import java.util.List;
 
-public class AbstractService<T> implements Service<T> {
+public abstract class AbstractService<T> implements Service<T> {
 
     private final DataAccess<T> dataAccess;
 
@@ -30,9 +30,10 @@ public class AbstractService<T> implements Service<T> {
     }
 
     @Override
-    public T update(T entity) {
+    public T update(Integer id, T entity) {
+        T oldEntity = findById(id);
         dataAccess.update(entity);
-        return entity;
+        return oldEntity;
     }
 
     @Override

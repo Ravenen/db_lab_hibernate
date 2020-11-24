@@ -6,7 +6,7 @@ import ua.lviv.iot.hiberlab.model.dataaccess.DataAccess;
 
 import java.util.List;
 
-public class AbstractDataAccess<T> implements DataAccess<T> {
+public abstract class AbstractDataAccess<T> implements DataAccess<T> {
 
     private final Class<T> entityClass;
     private final SessionUtils sessionUtils;
