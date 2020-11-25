@@ -112,4 +112,30 @@ public abstract class AbstractController<T> implements Controller<T> {
             }
         }
     }
+
+    protected <R> void enterEntityValueForColumn(T entity, BiConsumer<T, R> setter, String columnName, Service<R> service, boolean optional) {
+        Scanner input = new Scanner(System.in, "UTF-8");
+        while (true) {
+            System.out.printf(ENTER_DATA_FORMAT, columnName, "", optional ? "(optional)" : "");
+            String inputText = input.nextLine();
+            try {
+                Integer value = Integer.parseInt(inputText);
+                R entityColumn = service.findById(value);
+                if (entityColumn != null) {
+                    setter.accept(entity, entityColumn);
+                    break;
+                } else {
+                    System.out.println(ERROR_INVALID_VALUE);
+                }
+            } catch (IllegalArgumentException e) {
+                if (inputText.equals("") && optional) {
+                    setter.accept(entity, null);
+                    break;
+                } else {
+                    System.out.println(ERROR_INVALID_VALUE);
+                    System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
+                }
+            }
+        }
+    }
 }
