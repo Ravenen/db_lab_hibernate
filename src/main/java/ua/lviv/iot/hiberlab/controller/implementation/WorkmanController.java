@@ -1,8 +1,9 @@
 package ua.lviv.iot.hiberlab.controller.implementation;
 
-import ua.lviv.iot.hiberlab.model.entity.*;
-import ua.lviv.iot.hiberlab.model.service.Service;
-import ua.lviv.iot.hiberlab.model.service.implementation.*;
+import ua.lviv.iot.hiberlab.model.entity.WorkmanEntity;
+import ua.lviv.iot.hiberlab.model.service.implementation.PostService;
+import ua.lviv.iot.hiberlab.model.service.implementation.SexService;
+import ua.lviv.iot.hiberlab.model.service.implementation.WorkmanService;
 import ua.lviv.iot.hiberlab.view.Formatter;
 
 import java.math.BigDecimal;
@@ -54,47 +55,8 @@ public class WorkmanController extends AbstractController<WorkmanEntity> {
         super.enterValueForColumn(entity, WorkmanEntity::setSurname, "surname", String.class, false, 45);
         super.enterValueForColumn(entity, WorkmanEntity::setPricePerHourUah, "price_per_hour_uah", BigDecimal.class, false, -1);
         super.enterValueForColumn(entity, WorkmanEntity::setContactNumber, "contact_number", String.class, true, 13);
-        Scanner input = new Scanner(System.in, "UTF-8");
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "sex_id", "", "(optional)");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<SexEntity> sexService = new SexService();
-                SexEntity sex = sexService.findById(value);
-                if (sex != null) {
-                    entity.setSexBySexId(sex);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                if (!inputText.equals("")) {
-                    System.out.println(ERROR_INVALID_VALUE);
-                    System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                } else {
-                    break;
-                }
-            }
-        }
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "post_id", "", "");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<PostEntity> postService = new PostService();
-                PostEntity post = postService.findById(value);
-                if (post != null) {
-                    entity.setPostByPostId(post);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_INVALID_VALUE);
-                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-            }
-        }
+        super.enterEntityValueForColumn(entity, WorkmanEntity::setSexBySexId, "sex_id", new SexService(), true);
+        super.enterEntityValueForColumn(entity, WorkmanEntity::setPostByPostId, "post_id", new PostService(), false);
         WorkmanEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
         List<List<String>> body = new LinkedList<>();
@@ -134,49 +96,10 @@ public class WorkmanController extends AbstractController<WorkmanEntity> {
                 super.enterValueForColumn(entity, WorkmanEntity::setContactNumber, "contact_number", String.class, true, 13);
                 break;
             case ("sex_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "sex_id", "", "(optional)");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<SexEntity> sexService = new SexService();
-                        SexEntity sex = sexService.findById(value);
-                        if (sex != null) {
-                            entity.setSexBySexId(sex);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        if (!inputText.equals("")) {
-                            System.out.println(ERROR_INVALID_VALUE);
-                            System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                        } else {
-                            entity.setSexBySexId(null);
-                            break;
-                        }
-                    }
-                }
+                super.enterEntityValueForColumn(entity, WorkmanEntity::setSexBySexId, "sex_id", new SexService(), true);
                 break;
             case ("post_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "post_id", "", "");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<PostEntity> postService = new PostService();
-                        PostEntity post = postService.findById(value);
-                        if (post != null) {
-                            entity.setPostByPostId(post);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ERROR_INVALID_VALUE);
-                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                    }
-                }
+                super.enterEntityValueForColumn(entity, WorkmanEntity::setPostByPostId, "post_id", new PostService(), false);
                 break;
         }
         WorkmanEntity oldEntity = super.update(id, entity);

@@ -1,8 +1,6 @@
 package ua.lviv.iot.hiberlab.controller.implementation;
 
-import ua.lviv.iot.hiberlab.model.entity.CountryEntity;
 import ua.lviv.iot.hiberlab.model.entity.ManufacturerEntity;
-import ua.lviv.iot.hiberlab.model.service.Service;
 import ua.lviv.iot.hiberlab.model.service.implementation.CountryService;
 import ua.lviv.iot.hiberlab.model.service.implementation.ManufacturerService;
 import ua.lviv.iot.hiberlab.view.Formatter;
@@ -54,25 +52,7 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         super.enterValueForColumn(entity, ManufacturerEntity::setName, "name", String.class, false, 45);
         super.enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
                 13);
-        Scanner input = new Scanner(System.in, "UTF-8");
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<CountryEntity> countryService = new CountryService();
-                CountryEntity country = countryService.findById(value);
-                if (country != null) {
-                    entity.setCountryByCountryId(country);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_INVALID_VALUE);
-                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-            }
-        }
+        super.enterEntityValueForColumn(entity, ManufacturerEntity::setCountryByCountryId, "country_id", new CountryService(), false);
         ManufacturerEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
         List<List<String>> body = new LinkedList<>();
@@ -103,29 +83,11 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
                 super.enterValueForColumn(entity, ManufacturerEntity::setName, "name", String.class, false, 45);
                 break;
             case ("contact_number"):
-                super
-                        .enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
-                                13);
+                super.enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
+                        13);
                 break;
             case ("country_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<CountryEntity> countryService = new CountryService();
-                        CountryEntity country = countryService.findById(value);
-                        if (country != null) {
-                            entity.setCountryByCountryId(country);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ERROR_INVALID_VALUE);
-                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                    }
-                }
+                super.enterEntityValueForColumn(entity, ManufacturerEntity::setCountryByCountryId, "country_id", new CountryService(), false);
                 break;
         }
         ManufacturerEntity oldEntity = super.update(id, entity);

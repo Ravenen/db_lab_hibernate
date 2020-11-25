@@ -1,8 +1,9 @@
 package ua.lviv.iot.hiberlab.controller.implementation;
 
-import ua.lviv.iot.hiberlab.model.entity.*;
-import ua.lviv.iot.hiberlab.model.service.Service;
-import ua.lviv.iot.hiberlab.model.service.implementation.*;
+import ua.lviv.iot.hiberlab.model.entity.TerminalEntity;
+import ua.lviv.iot.hiberlab.model.service.implementation.AddressService;
+import ua.lviv.iot.hiberlab.model.service.implementation.ManufacturerService;
+import ua.lviv.iot.hiberlab.model.service.implementation.TerminalService;
 import ua.lviv.iot.hiberlab.view.Formatter;
 
 import java.sql.Date;
@@ -52,43 +53,8 @@ public class TerminalController extends AbstractController<TerminalEntity> {
     public TerminalEntity create(TerminalEntity entity) {
         super.enterValueForColumn(entity, TerminalEntity::setGpsCoordinates, "gps_coordinates", String.class, true, 24);
         super.enterValueForColumn(entity, TerminalEntity::setCommissioningDate, "commissioning_date", Date.class, true, -1);
-        Scanner input = new Scanner(System.in, "UTF-8");
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "manufacturer_id", "", "");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<ManufacturerEntity> manufacturerService = new ManufacturerService();
-                ManufacturerEntity manufacturer = manufacturerService.findById(value);
-                if (manufacturer != null) {
-                    entity.setManufacturerByManufacturerId(manufacturer);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_INVALID_VALUE);
-                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-            }
-        }
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "address_id", "", "");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<AddressEntity> addressService = new AddressService();
-                AddressEntity address = addressService.findById(value);
-                if (address != null) {
-                    entity.setAddressByAddressId(address);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_INVALID_VALUE);
-                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-            }
-        }
+        super.enterEntityValueForColumn(entity, TerminalEntity::setManufacturerByManufacturerId, "manufacturer_id", new ManufacturerService(), false);
+        super.enterEntityValueForColumn(entity, TerminalEntity::setAddressByAddressId, "address_id", new AddressService(), false);
         TerminalEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
         List<List<String>> body = new LinkedList<>();
@@ -122,44 +88,10 @@ public class TerminalController extends AbstractController<TerminalEntity> {
                 super.enterValueForColumn(entity, TerminalEntity::setCommissioningDate, "commissioning_date", Date.class, true, -1);
                 break;
             case ("manufacturer_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "manufacturer_id", "", "");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<ManufacturerEntity> manufacturerService = new ManufacturerService();
-                        ManufacturerEntity manufacturer = manufacturerService.findById(value);
-                        if (manufacturer != null) {
-                            entity.setManufacturerByManufacturerId(manufacturer);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ERROR_INVALID_VALUE);
-                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                    }
-                }
+                super.enterEntityValueForColumn(entity, TerminalEntity::setManufacturerByManufacturerId, "manufacturer_id", new ManufacturerService(), false);
                 break;
             case ("address_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "address_id", "", "");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<AddressEntity> addressService = new AddressService();
-                        AddressEntity address = addressService.findById(value);
-                        if (address != null) {
-                            entity.setAddressByAddressId(address);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ERROR_INVALID_VALUE);
-                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                    }
-                }
+                super.enterEntityValueForColumn(entity, TerminalEntity::setAddressByAddressId, "address_id", new AddressService(), false);
                 break;
         }
         TerminalEntity oldEntity = super.update(id, entity);

@@ -51,25 +51,6 @@ public class RegionController extends AbstractController<RegionEntity> {
     public RegionEntity create(RegionEntity entity) {
         super.enterValueForColumn(entity, RegionEntity::setName, "name", String.class, false, 45);
         super.enterEntityValueForColumn(entity, RegionEntity::setCountryByCountryId, "country_id", new CountryService(), false);
-//        Scanner input = new Scanner(System.in, "UTF-8");
-//        while (true) {
-//            System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-//            String inputText = input.nextLine();
-//            try {
-//                Integer value = Integer.parseInt(inputText);
-//                Service<CountryEntity> countryService = new CountryService();
-//                CountryEntity country = countryService.findById(value);
-//                if (country != null) {
-//                    entity.setCountryByCountryId(country);
-//                    break;
-//                } else {
-//                    System.out.println(ERROR_INVALID_VALUE);
-//                }
-//            } catch (IllegalArgumentException e) {
-//                System.out.println(ERROR_INVALID_VALUE);
-//                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-//            }
-//        }
         RegionEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
         List<List<String>> body = new LinkedList<>();
@@ -101,24 +82,6 @@ public class RegionController extends AbstractController<RegionEntity> {
                 break;
             case ("country_id"):
                 super.enterEntityValueForColumn(entity, RegionEntity::setCountryByCountryId, "country_id", new CountryService(), false);
-//                while (true) {
-//                    System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-//                    String inputText = input.nextLine();
-//                    try {
-//                        Integer value = Integer.parseInt(inputText);
-//                        Service<CountryEntity> countryService = new CountryService();
-//                        CountryEntity country = countryService.findById(value);
-//                        if (country != null) {
-//                            entity.setCountryByCountryId(country);
-//                            break;
-//                        } else {
-//                            System.out.println(ERROR_INVALID_VALUE);
-//                        }
-//                    } catch (IllegalArgumentException e) {
-//                        System.out.println(ERROR_INVALID_VALUE);
-//                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-//                    }
-//                }
                 break;
         }
         RegionEntity oldEntity = super.update(id, entity);

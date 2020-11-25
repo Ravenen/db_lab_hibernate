@@ -1,8 +1,6 @@
 package ua.lviv.iot.hiberlab.controller.implementation;
 
 import ua.lviv.iot.hiberlab.model.entity.AddressEntity;
-import ua.lviv.iot.hiberlab.model.entity.CityEntity;
-import ua.lviv.iot.hiberlab.model.service.Service;
 import ua.lviv.iot.hiberlab.model.service.implementation.AddressService;
 import ua.lviv.iot.hiberlab.model.service.implementation.CityService;
 import ua.lviv.iot.hiberlab.view.Formatter;
@@ -53,25 +51,7 @@ public class AddressController extends AbstractController<AddressEntity> {
     public AddressEntity create(AddressEntity entity) {
         super.enterValueForColumn(entity, AddressEntity::setStreet, "street", String.class, false, 64);
         super.enterValueForColumn(entity, AddressEntity::setHouse, "house", Integer.class, true, -1);
-        Scanner input = new Scanner(System.in, "UTF-8");
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "city_id", "", "");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<CityEntity> cityService = new CityService();
-                CityEntity city = cityService.findById(value);
-                if (city != null) {
-                    entity.setCityByCityId(city);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_INVALID_VALUE);
-                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-            }
-        }
+        super.enterEntityValueForColumn(entity, AddressEntity::setCityByCityId, "city_id", new CityService(), false);
         AddressEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
         List<List<String>> body = new LinkedList<>();
@@ -105,24 +85,7 @@ public class AddressController extends AbstractController<AddressEntity> {
                 super.enterValueForColumn(entity, AddressEntity::setHouse, "house", Integer.class, true, -1);
                 break;
             case ("city_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "city_id", "", "");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<CityEntity> cityService = new CityService();
-                        CityEntity city = cityService.findById(value);
-                        if (city != null) {
-                            entity.setCityByCityId(city);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ERROR_INVALID_VALUE);
-                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                    }
-                }
+                super.enterEntityValueForColumn(entity, AddressEntity::setCityByCityId, "city_id", new CityService(), false);
                 break;
         }
         AddressEntity oldEntity = super.update(id, entity);

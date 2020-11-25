@@ -1,9 +1,6 @@
 package ua.lviv.iot.hiberlab.controller.implementation;
 
 import ua.lviv.iot.hiberlab.model.entity.CityEntity;
-import ua.lviv.iot.hiberlab.model.entity.CountryEntity;
-import ua.lviv.iot.hiberlab.model.entity.RegionEntity;
-import ua.lviv.iot.hiberlab.model.service.Service;
 import ua.lviv.iot.hiberlab.model.service.implementation.CityService;
 import ua.lviv.iot.hiberlab.model.service.implementation.CountryService;
 import ua.lviv.iot.hiberlab.model.service.implementation.RegionService;
@@ -55,47 +52,8 @@ public class CityController extends AbstractController<CityEntity> {
     public CityEntity create(CityEntity entity) {
         super.enterValueForColumn(entity, CityEntity::setName, "name", String.class, false, 45);
         super.enterValueForColumn(entity, CityEntity::setPostalCode, "postal_code", String.class, true, 6);
-        Scanner input = new Scanner(System.in, "UTF-8");
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<CountryEntity> countryService = new CountryService();
-                CountryEntity country = countryService.findById(value);
-                if (country != null) {
-                    entity.setCountryByCountryId(country);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_INVALID_VALUE);
-                System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-            }
-        }
-        while (true) {
-            System.out.printf(ENTER_DATA_FORMAT, "region_id", "", "(optional)");
-            String inputText = input.nextLine();
-            try {
-                Integer value = Integer.parseInt(inputText);
-                Service<RegionEntity> regionService = new RegionService();
-                RegionEntity region = regionService.findById(value);
-                if (region != null) {
-                    entity.setRegionByRegionId(region);
-                    break;
-                } else {
-                    System.out.println(ERROR_INVALID_VALUE);
-                }
-            } catch (IllegalArgumentException e) {
-                if (!inputText.equals("")) {
-                    System.out.println(ERROR_INVALID_VALUE);
-                    System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                } else {
-                    break;
-                }
-            }
-        }
+        super.enterEntityValueForColumn(entity, CityEntity::setCountryByCountryId, "country_id", new CountryService(), false);
+        super.enterEntityValueForColumn(entity, CityEntity::setRegionByRegionId, "region_id", new RegionService(), true);
         CityEntity createdEntity = super.create(entity);
         List<String> headerList = new LinkedList<>(COLUMNS_NAMES);
         List<List<String>> body = new LinkedList<>();
@@ -129,49 +87,10 @@ public class CityController extends AbstractController<CityEntity> {
                 super.enterValueForColumn(entity, CityEntity::setPostalCode, "postal_code", String.class, true, 6);
                 break;
             case ("country_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "country_id", "", "");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<CountryEntity> countryService = new CountryService();
-                        CountryEntity country = countryService.findById(value);
-                        if (country != null) {
-                            entity.setCountryByCountryId(country);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(ERROR_INVALID_VALUE);
-                        System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                    }
-                }
+                super.enterEntityValueForColumn(entity, CityEntity::setCountryByCountryId, "country_id", new CountryService(), false);
                 break;
             case ("region_id"):
-                while (true) {
-                    System.out.printf(ENTER_DATA_FORMAT, "region_id", "", "(optional)");
-                    String inputText = input.nextLine();
-                    try {
-                        Integer value = Integer.parseInt(inputText);
-                        Service<RegionEntity> regionService = new RegionService();
-                        RegionEntity region = regionService.findById(value);
-                        if (region != null) {
-                            entity.setRegionByRegionId(region);
-                            break;
-                        } else {
-                            System.out.println(ERROR_INVALID_VALUE);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        if (!inputText.equals("")) {
-                            System.out.println(ERROR_INVALID_VALUE);
-                            System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
-                        } else {
-                            entity.setRegionByRegionId(null);
-                            break;
-                        }
-                    }
-                }
+                super.enterEntityValueForColumn(entity, CityEntity::setRegionByRegionId, "region_id", new RegionService(), true);
                 break;
         }
         CityEntity oldEntity = super.update(id, entity);
