@@ -1,127 +1,143 @@
 package ua.lviv.iot.hiberlab.model.entity;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "workman", schema = "pavliyk_3")
 public class WorkmanEntity {
-    private Integer id;
-    private String name;
-    private String surname;
-    private BigDecimal pricePerHourUah;
-    private String contactNumber;
-    private SexEntity sexBySexId;
-    private PostEntity postByPostId;
+  private Integer id;
+  private String name;
+  private String surname;
+  private BigDecimal pricePerHourUah;
+  private String contactNumber;
+  private SexEntity sexBySexId;
+  private PostEntity postByPostId;
 
-    public WorkmanEntity() {
+  public WorkmanEntity() {
+  }
+
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  @Basic
+  @Column(name = "name")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  @Basic
+  @Column(name = "surname")
+  public String getSurname() {
+    return surname;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
+
+  @Basic
+  @Column(name = "price_per_hour_uah")
+  public BigDecimal getPricePerHourUah() {
+    return pricePerHourUah;
+  }
+
+  public void setPricePerHourUah(BigDecimal pricePerHourUah) {
+    this.pricePerHourUah = pricePerHourUah;
+  }
+
+  @Basic
+  @Column(name = "contact_number")
+  public String getContactNumber() {
+    return contactNumber;
+  }
+
+  public void setContactNumber(String contactNumber) {
+    this.contactNumber = contactNumber;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
+    WorkmanEntity that = (WorkmanEntity) o;
+
+    if (!id.equals(that.id)) {
+      return false;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
+    if (!name.equals(that.name)) {
+      return false;
     }
-
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    if (!surname.equals(that.surname)) {
+      return false;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    if (!pricePerHourUah.equals(that.pricePerHourUah)) {
+      return false;
     }
-
-    @Basic
-    @Column(name = "surname")
-    public String getSurname() {
-        return surname;
+    if (!Objects.equals(contactNumber, that.contactNumber)) {
+      return false;
     }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    if (!Objects.equals(sexBySexId, that.sexBySexId)) {
+      return false;
     }
+    return postByPostId.equals(that.postByPostId);
+  }
 
-    @Basic
-    @Column(name = "price_per_hour_uah")
-    public BigDecimal getPricePerHourUah() {
-        return pricePerHourUah;
-    }
+  @Override
+  public int hashCode() {
+    int result = id.hashCode();
+    result = 31 * result + name.hashCode();
+    result = 31 * result + surname.hashCode();
+    result = 31 * result + pricePerHourUah.hashCode();
+    result = 31 * result + (contactNumber != null ? contactNumber.hashCode() : 0);
+    result = 31 * result + (sexBySexId != null ? sexBySexId.hashCode() : 0);
+    result = 31 * result + postByPostId.hashCode();
+    return result;
+  }
 
-    public void setPricePerHourUah(BigDecimal pricePerHourUah) {
-        this.pricePerHourUah = pricePerHourUah;
-    }
+  @ManyToOne
+  @JoinColumn(name = "sex_id", referencedColumnName = "id")
+  public SexEntity getSexBySexId() {
+    return sexBySexId;
+  }
 
-    @Basic
-    @Column(name = "contact_number")
-    public String getContactNumber() {
-        return contactNumber;
-    }
+  public void setSexBySexId(SexEntity sexBySexId) {
+    this.sexBySexId = sexBySexId;
+  }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
+  @ManyToOne
+  @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
+  public PostEntity getPostByPostId() {
+    return postByPostId;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        WorkmanEntity that = (WorkmanEntity) o;
-
-        if (!id.equals(that.id))
-            return false;
-        if (!name.equals(that.name))
-            return false;
-        if (!surname.equals(that.surname))
-            return false;
-        if (!pricePerHourUah.equals(that.pricePerHourUah))
-            return false;
-        if (!Objects.equals(contactNumber, that.contactNumber))
-            return false;
-        if (!Objects.equals(sexBySexId, that.sexBySexId))
-            return false;
-        return postByPostId.equals(that.postByPostId);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + surname.hashCode();
-        result = 31 * result + pricePerHourUah.hashCode();
-        result = 31 * result + (contactNumber != null ? contactNumber.hashCode() : 0);
-        result = 31 * result + (sexBySexId != null ? sexBySexId.hashCode() : 0);
-        result = 31 * result + postByPostId.hashCode();
-        return result;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "sex_id", referencedColumnName = "id")
-    public SexEntity getSexBySexId() {
-        return sexBySexId;
-    }
-
-    public void setSexBySexId(SexEntity sexBySexId) {
-        this.sexBySexId = sexBySexId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
-    public PostEntity getPostByPostId() {
-        return postByPostId;
-    }
-
-    public void setPostByPostId(PostEntity postByPostId) {
-        this.postByPostId = postByPostId;
-    }
+  public void setPostByPostId(PostEntity postByPostId) {
+    this.postByPostId = postByPostId;
+  }
 }

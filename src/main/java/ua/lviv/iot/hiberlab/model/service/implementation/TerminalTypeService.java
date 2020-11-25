@@ -4,7 +4,7 @@ import ua.lviv.iot.hiberlab.model.dataaccess.implementation.TerminalTypeDataAcce
 import ua.lviv.iot.hiberlab.model.entity.TerminalTypeEntity;
 
 public class TerminalTypeService extends AbstractService<TerminalTypeEntity> {
-    public TerminalTypeService() {
-        super(new TerminalTypeDataAccess());
-    }
+  public TerminalTypeService() {
+    super(new TerminalTypeDataAccess());
+  }
 }
