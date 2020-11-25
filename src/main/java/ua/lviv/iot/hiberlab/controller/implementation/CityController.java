@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class CityController extends AbstractController<CityEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "postal_code", "country_id", "region_id");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "postal_code", "country", "region");
 
     public CityController() {
         super(new CityService());
@@ -86,10 +86,10 @@ public class CityController extends AbstractController<CityEntity> {
             case ("postal_code"):
                 super.enterValueForColumn(entity, CityEntity::setPostalCode, "postal_code", String.class, true, 6);
                 break;
-            case ("country_id"):
+            case ("country"):
                 super.enterEntityValueForColumn(entity, CityEntity::setCountryByCountryId, "country_id", new CountryService(), false);
                 break;
-            case ("region_id"):
+            case ("region"):
                 super.enterEntityValueForColumn(entity, CityEntity::setRegionByRegionId, "region_id", new RegionService(), true);
                 break;
         }
@@ -121,8 +121,8 @@ public class CityController extends AbstractController<CityEntity> {
         String id = entity.getId().toString();
         String name = entity.getName();
         String postalCode = entity.getPostalCode() == null ? "-" : entity.getPostalCode();
-        String countryId = entity.getCountryByCountryId().getId().toString();
-        String regionId = entity.getRegionByRegionId() == null ? "-" : entity.getRegionByRegionId().getId().toString();
-        return new LinkedList<>(List.of(id, name, postalCode, countryId, regionId));
+        String countryName = entity.getCountryByCountryId().getName();
+        String regionName = entity.getRegionByRegionId() == null ? "-" : entity.getRegionByRegionId().getName();
+        return new LinkedList<>(List.of(id, name, postalCode, countryName, regionName));
     }
 }

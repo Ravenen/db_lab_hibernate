@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class ServiceController extends AbstractController<ServiceEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "date", "terminal_id", "workman_id", "service_type_id", "duration_in_hours", "total_price_uah");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "date", "terminal_id", "workman", "service_type", "duration_in_hours", "total_price_uah");
 
     public ServiceController() {
         super(new ServiceService());
@@ -94,10 +94,10 @@ public class ServiceController extends AbstractController<ServiceEntity> {
             case ("terminal_id"):
                 super.enterEntityValueForColumn(entity, ServiceEntity::setTerminalByTerminalId, "terminal_id", new TerminalService(), false);
                 break;
-            case ("workman_id"):
+            case ("workman"):
                 super.enterEntityValueForColumn(entity, ServiceEntity::setWorkmanByWorkmanId, "workman_id", new WorkmanService(), false);
                 break;
-            case ("service_type_id"):
+            case ("service_type"):
                 super.enterEntityValueForColumn(entity, ServiceEntity::setServiceTypeByServiceTypeId, "service_type_id", new ServiceTypeService(), true);
                 break;
         }
@@ -129,10 +129,10 @@ public class ServiceController extends AbstractController<ServiceEntity> {
         String id = entity.getId().toString();
         String date = entity.getDate().toString();
         String terminalId = entity.getTerminalByTerminalId().getId().toString();
-        String workmanId = entity.getWorkmanByWorkmanId().getId().toString();
-        String serviceTypeId = entity.getServiceTypeByServiceTypeId() == null ? "-" : entity.getServiceTypeByServiceTypeId().getId().toString();
+        String workmanFullName = entity.getWorkmanByWorkmanId().getName() + " " + entity.getWorkmanByWorkmanId().getSurname();
+        String serviceTypeName = entity.getServiceTypeByServiceTypeId() == null ? "-" : entity.getServiceTypeByServiceTypeId().getType();
         String durationInHours = entity.getDurationInHours().toString();
         String totalPriceUah = entity.getTotalPriceUah() == null ? "..." : entity.getTotalPriceUah().toString();
-        return new LinkedList<>(List.of(id, date, terminalId, workmanId, serviceTypeId, durationInHours, totalPriceUah));
+        return new LinkedList<>(List.of(id, date, terminalId, workmanFullName, serviceTypeName, durationInHours, totalPriceUah));
     }
 }

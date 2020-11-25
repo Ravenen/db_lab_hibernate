@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class TerminalController extends AbstractController<TerminalEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "gps_coordinates", "commissioning_date", "manufacturer_id", "address_id");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "gps_coordinates", "commissioning_date", "manufacturer", "address_id");
 
     public TerminalController() {
         super(new TerminalService());
@@ -87,7 +87,7 @@ public class TerminalController extends AbstractController<TerminalEntity> {
             case ("commissioning_date"):
                 super.enterValueForColumn(entity, TerminalEntity::setCommissioningDate, "commissioning_date", Date.class, true, -1);
                 break;
-            case ("manufacturer_id"):
+            case ("manufacturer"):
                 super.enterEntityValueForColumn(entity, TerminalEntity::setManufacturerByManufacturerId, "manufacturer_id", new ManufacturerService(), false);
                 break;
             case ("address_id"):
@@ -122,8 +122,8 @@ public class TerminalController extends AbstractController<TerminalEntity> {
         String id = entity.getId().toString();
         String gpsCoordinates = entity.getGpsCoordinates() == null ? "-" : entity.getGpsCoordinates();
         String commissioningDate = entity.getCommissioningDate() == null ? "-" : entity.getCommissioningDate().toString();
-        String manufacturerId = entity.getManufacturerByManufacturerId().getId().toString();
+        String manufacturerName = entity.getManufacturerByManufacturerId().getName();
         String addressId = entity.getAddressByAddressId().getId().toString();
-        return new LinkedList<>(List.of(id, gpsCoordinates, commissioningDate, manufacturerId, addressId));
+        return new LinkedList<>(List.of(id, gpsCoordinates, commissioningDate, manufacturerName, addressId));
     }
 }

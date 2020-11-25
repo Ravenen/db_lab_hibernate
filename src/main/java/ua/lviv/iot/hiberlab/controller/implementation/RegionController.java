@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class RegionController extends AbstractController<RegionEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "country_id");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "country");
 
     public RegionController() {
         super(new RegionService());
@@ -80,7 +80,7 @@ public class RegionController extends AbstractController<RegionEntity> {
             case ("name"):
                 super.enterValueForColumn(entity, RegionEntity::setName, "name", String.class, false, 45);
                 break;
-            case ("country_id"):
+            case ("country"):
                 super.enterEntityValueForColumn(entity, RegionEntity::setCountryByCountryId, "country_id", new CountryService(), false);
                 break;
         }
@@ -111,7 +111,7 @@ public class RegionController extends AbstractController<RegionEntity> {
     protected List<String> entityToList(RegionEntity entity) {
         String id = entity.getId().toString();
         String name = entity.getName();
-        String countryId = entity.getCountryByCountryId().getId().toString();
-        return new LinkedList<>(List.of(id, name, countryId));
+        String countryName = entity.getCountryByCountryId().getName();
+        return new LinkedList<>(List.of(id, name, countryName));
     }
 }

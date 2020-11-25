@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class WorkmanController extends AbstractController<WorkmanEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "surname", "price_per_hour_uah", "contact_number", "sex_id", "post_id");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "surname", "price_per_hour_uah", "contact_number", "sex", "post");
 
     public WorkmanController() {
         super(new WorkmanService());
@@ -95,10 +95,10 @@ public class WorkmanController extends AbstractController<WorkmanEntity> {
             case ("contact_number"):
                 super.enterValueForColumn(entity, WorkmanEntity::setContactNumber, "contact_number", String.class, true, 13);
                 break;
-            case ("sex_id"):
+            case ("sex"):
                 super.enterEntityValueForColumn(entity, WorkmanEntity::setSexBySexId, "sex_id", new SexService(), true);
                 break;
-            case ("post_id"):
+            case ("post"):
                 super.enterEntityValueForColumn(entity, WorkmanEntity::setPostByPostId, "post_id", new PostService(), false);
                 break;
         }
@@ -132,8 +132,8 @@ public class WorkmanController extends AbstractController<WorkmanEntity> {
         String surname = entity.getSurname();
         String pricePerHourUah = entity.getPricePerHourUah().toString();
         String contactNumber = entity.getContactNumber() == null ? "-" : entity.getContactNumber();
-        String sexId = entity.getSexBySexId() == null ? "-" : entity.getSexBySexId().getId().toString();
-        String postId = entity.getPostByPostId().getId().toString();
-        return new LinkedList<>(List.of(id, name, surname, pricePerHourUah, contactNumber, sexId, postId));
+        String sexName = entity.getSexBySexId() == null ? "-" : entity.getSexBySexId().getSex();
+        String postName = entity.getPostByPostId().getPost();
+        return new LinkedList<>(List.of(id, name, surname, pricePerHourUah, contactNumber, sexName, postName));
     }
 }

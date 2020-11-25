@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class AddressController extends AbstractController<AddressEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "street", "house", "city_id");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "street", "house", "city");
 
     public AddressController() {
         super(new AddressService());
@@ -84,7 +84,7 @@ public class AddressController extends AbstractController<AddressEntity> {
             case ("house"):
                 super.enterValueForColumn(entity, AddressEntity::setHouse, "house", Integer.class, true, -1);
                 break;
-            case ("city_id"):
+            case ("city"):
                 super.enterEntityValueForColumn(entity, AddressEntity::setCityByCityId, "city_id", new CityService(), false);
                 break;
         }
@@ -116,7 +116,7 @@ public class AddressController extends AbstractController<AddressEntity> {
         String id = entity.getId().toString();
         String street = entity.getStreet();
         String house = entity.getHouse() == null ? "-" : entity.getHouse().toString();
-        String cityId = entity.getCityByCityId().getId().toString();
-        return new LinkedList<>(List.of(id, street, house, cityId));
+        String cityName = entity.getCityByCityId().getName();
+        return new LinkedList<>(List.of(id, street, house, cityName));
     }
 }

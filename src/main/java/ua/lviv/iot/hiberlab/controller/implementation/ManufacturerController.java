@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class ManufacturerController extends AbstractController<ManufacturerEntity> {
 
-    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "contact_number", "country_id");
+    private static final List<String> COLUMNS_NAMES = List.of("id", "name", "contact_number", "country");
 
     public ManufacturerController() {
         super(new ManufacturerService());
@@ -86,7 +86,7 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
                 super.enterValueForColumn(entity, ManufacturerEntity::setContactNumber, "contact_number", String.class, true,
                         13);
                 break;
-            case ("country_id"):
+            case ("country"):
                 super.enterEntityValueForColumn(entity, ManufacturerEntity::setCountryByCountryId, "country_id", new CountryService(), false);
                 break;
         }
@@ -118,7 +118,7 @@ public class ManufacturerController extends AbstractController<ManufacturerEntit
         String id = entity.getId().toString();
         String name = entity.getName();
         String contactNumber = entity.getContactNumber() == null ? "-" : entity.getContactNumber();
-        String countryId = entity.getCountryByCountryId().getId().toString();
-        return new LinkedList<>(List.of(id, name, contactNumber, countryId));
+        String countryName = entity.getCountryByCountryId().getName();
+        return new LinkedList<>(List.of(id, name, contactNumber, countryName));
     }
 }
