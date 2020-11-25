@@ -152,6 +152,7 @@ public class WorkmanController extends AbstractController<WorkmanEntity> {
                             System.out.println(ERROR_INVALID_VALUE);
                             System.out.printf(ERROR_MESSAGE_FORMAT, e.getMessage());
                         } else {
+                            entity.setSexBySexId(null);
                             break;
                         }
                     }
